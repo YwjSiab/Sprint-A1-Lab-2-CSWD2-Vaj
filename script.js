@@ -1,0 +1,26 @@
+const triggers = document.querySelectorAll('a');
+const highlight = document.createElement('span');
+highlight.classList.add('highlight');
+document.body.append(highlight);
+
+const highlightlink = (e) => {
+    const linkCoords = e.target.getBoundingClientRect();
+    const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX,
+    }
+     console.log(linkCoords);
+     console.log(coords);
+     highlight.style.width = `${coords.width}px`
+     highlight.style.height = `${coords.height}px`
+     // highlight.style.position = 'absolute';
+     //highlight.style.top = `${coords.top}px`;
+     //highlight.style.left = `${coords.left}px`
+     highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`
+};
+
+triggers.forEach((link) => {
+    link.addEventListener('mouseenter', highlightlink);
+});
